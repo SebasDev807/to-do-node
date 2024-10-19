@@ -47,7 +47,7 @@ export const findTaskByTerm = async (req = request, res = response) => {
 
         if (task.length === 0)
             return res.status(404).json({
-                error: `Task with term '${term}' not found`
+                error: `Task with title, id, or status '${term}' not found`
             });
 
         return res.json({
@@ -59,9 +59,8 @@ export const findTaskByTerm = async (req = request, res = response) => {
         console.error(error);
 
         res.status(500).json({
-            error: 'Something went broke'
+            error: 'Something went broke.'
         });
-
     }
 }
 
@@ -85,7 +84,7 @@ export const updateTask = async (req = request, res = response) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({
-            error: 'something went broke'
+            error: 'Something went broke.'
         });
     }
 }

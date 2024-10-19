@@ -103,6 +103,7 @@ const tasks = [
 ];
 
 taskSeed.get('/tasks', async (req, res) => {
+
     try {
 
         await Task.deleteMany();
@@ -117,7 +118,7 @@ taskSeed.get('/tasks', async (req, res) => {
         console.error(error);
 
         res.status(500).json({
-            error: 'Something went broke'
+            error: 'Something went broke.'
         });
 
     }

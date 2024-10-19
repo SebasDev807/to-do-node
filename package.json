@@ -4,6 +4,7 @@
   "main": "app.js",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-validator": "^7.2.0",
@@ -12,7 +13,7 @@
   },
   "scripts": {
     "start": "node app",
-     "dev": "nodemon --exec \"cls && node app\""
+    "dev": "nodemon --exec \"cls && node app\""
   },
   "type": "module"
 }

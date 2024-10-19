@@ -1,8 +1,9 @@
+import { taskRouter, userRouter, authRouter } from './src/routes/index.js'
 import express from 'express';
 import dotenv from 'dotenv';
 import dbConnect from './src/config/db.config.js';
 import taskSeed from './src/seed/task.seed.js';
-import taskRouter from './src/routes/task.routes.js';
+
 dotenv.config();
 
 await dbConnect();
@@ -15,6 +16,8 @@ app.use(express.json());
 
 //Routes
 app.use('/api/v1/tasks', taskRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/auth', authRouter);
 
 
 //Seed
