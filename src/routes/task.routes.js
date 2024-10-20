@@ -3,10 +3,13 @@ import { createTask, deleteTask, findAllPaginated, findTaskByTerm, updateTask } 
 import { checkValidationResult } from "../middlewares/check-validation-result.js";
 import { check } from "express-validator";
 import { isValidEnum } from "../helpers/check-enum.js";
+import { validateJWT } from "../middlewares/validate-jwt.js";
 const taskRouter = Router();
 
+//TODO: Validar roles [ADMIN, USER]
 
 taskRouter.post('/', [
+    validateJWT,
     check('title', 'Title must be more than 5 characters.')
         .isLength({ min: 5, max: 50 }),
 
@@ -27,6 +30,7 @@ taskRouter.post('/', [
 
 
 taskRouter.put('/:id', [
+    validateJWT,
     check('id', 'Invalid Mongo ID').isMongoId(),
     check('title', 'Title must be more than 5 characters.')
         .optional()
@@ -49,7 +53,8 @@ taskRouter.put('/:id', [
 
 
 taskRouter.delete('/:id', [
-    check('id','Invalid Mongo Id').isMongoId(),
+    validateJWT,
+    check('id', 'Invalid Mongo Id').isMongoId(),
     checkValidationResult
 ], deleteTask);
 

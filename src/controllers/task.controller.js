@@ -11,9 +11,12 @@ export const createTask = async (req = request, res = response) => {
     try {
 
         const task = await Task.create({
+            //Aqui establezco el id del usuario autenticado
+            author: req.user._id,
             status: status ? status.toUpperCase() : undefined,
             ...data
         });
+
 
         return res.status(201).json({ task });
 
@@ -45,7 +48,7 @@ export const findTaskByTerm = async (req = request, res = response) => {
             });
         }
 
-        if (task.length === 0)
+        if (!task || task.length === 0)
             return res.status(404).json({
                 error: `Task with title, id, or status '${term}' not found`
             });
@@ -89,13 +92,14 @@ export const updateTask = async (req = request, res = response) => {
     }
 }
 
-//TODO: Añadir Ordenamiento
+
 export const findAllPaginated = async (req = request, res = response) => {
 
     const { limit = 5, offset = 0 } = req.query;
 
     try {
         const results = await Task.find()
+            .populate('author', 'username _id')
             .skip(offset)
             .limit(+limit)
 

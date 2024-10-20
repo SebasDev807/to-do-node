@@ -1,5 +1,6 @@
 import { Router } from "express";
 import Task from "../models/task.model.js";
+import User from '../models/user.model.js'
 
 const taskSeed = Router();
 
@@ -99,12 +100,88 @@ const tasks = [
         description: "Conocer a otros desarrolladores y aprender",
         status: "PENDING",
         deadLine: new Date("2024-10-30")
+    },
+    {
+        title: "Estudiar un nuevo framework",
+        description: "Aprender sobre un nuevo framework de desarrollo web",
+        status: "PENDING",
+        deadLine: new Date("2024-11-15")
+    },
+    {
+        title: "Crear un portafolio en línea",
+        description: "Diseñar y desarrollar un portafolio para mostrar mis proyectos",
+        status: "PENDING",
+        deadLine: new Date("2024-11-30")
+    },
+    {
+        title: "Leer un libro de programación",
+        description: "Terminar de leer 'Clean Code' de Robert C. Martin",
+        status: "PENDING",
+        deadLine: new Date("2024-12-15")
+    },
+    {
+        title: "Participar en un hackathon",
+        description: "Unirse a un hackathon local y colaborar con otros",
+        status: "PENDING",
+        deadLine: new Date("2024-11-20")
+    },
+    {
+        title: "Actualizar el CV",
+        description: "Revisar y actualizar el currículum vitae",
+        status: "PENDING",
+        deadLine: new Date("2024-12-01")
+    },
+    {
+        title: "Aprender sobre bases de datos NoSQL",
+        description: "Explorar MongoDB y otras bases de datos NoSQL",
+        status: "PENDING",
+        deadLine: new Date("2024-12-05")
+    },
+    {
+        title: "Tomar un curso de JavaScript avanzado",
+        description: "Inscribirse en un curso en línea para mejorar mis habilidades",
+        status: "PENDING",
+        deadLine: new Date("2024-12-10")
+    },
+    {
+        title: "Conectar con un mentor",
+        description: "Buscar y establecer contacto con un mentor en la industria",
+        status: "PENDING",
+        deadLine: new Date("2024-11-25")
+    },
+    {
+        title: "Implementar un proyecto personal",
+        description: "Desarrollar un proyecto personal para aplicar lo aprendido",
+        status: "PENDING",
+        deadLine: new Date("2024-12-20")
+    },
+    {
+        title: "Revisar y practicar algoritmos",
+        description: "Dedicar tiempo a resolver problemas de algoritmos y estructuras de datos",
+        status: "PENDING",
+        deadLine: new Date("2024-12-30")
     }
 ];
 
 taskSeed.get('/tasks', async (req, res) => {
 
     try {
+
+        const users = await User.find();
+
+        //Extraer los ids para asignarselos a cada task
+        const ids = users.reduce((acc, user) => {
+            acc.push(user._id);
+            return acc;
+        }, []);
+
+        //Asignar un id aleatorio a cada usuario
+        //Simulando que estos crearon dicha tarea
+        tasks.forEach(task => {
+            const randomIndex = Math.floor(Math.random() * ids.length);
+            task.author = ids[randomIndex];
+        });
+
 
         await Task.deleteMany();
         await Task.insertMany(tasks);
