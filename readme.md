@@ -38,7 +38,7 @@ En desarrollo
 4. Ejecutar las semillas de usuario y tareas.
 
         ```
-         http://localhost:3000/api/v1/seed/users
+        http://localhost:3000/api/v1/seed/users
         http://localhost:3000/api/v1/seed/tasks
         ```
 
@@ -52,7 +52,7 @@ En desarrollo
 | POST   | `http://localhost:3000/api/v1/auth/login`          | Iniciar sesión, retorna un JWT                        |
 | POST   | `http://localhost:3000/api/v1/tasks`                | Crear tarea, requiere un JWT en el header             |
 | GET    | `http://localhost:3000/api/v1/tasks/:term`         | Buscar una tarea específica por título o estado       |
-| PATCH  | `http://localhost:3000/api/v1/tasks/:id`           | Actualizar una tarea por su ID, requiere JWT         |
+| PUT  | `http://localhost:3000/api/v1/tasks/:id`           | Actualizar una tarea por su ID, requiere JWT         |
 | GET    | `http://localhost:3000/api/v1/tasks?limit={number}&offset={number}`      | Obtener todas las tareas paginadas                    |
 | DELETE | `http://localhost:3000/api/v1/tasks/:id`           | Borrar tarea, requiere JWT                            |
 
