@@ -9,7 +9,7 @@ const TaskSchema = Schema({
     },
     description: {
         type: String,
-        maxlength: 200,
+        maxlength: 200, 
     },
     deadLine: {
         type: Date,

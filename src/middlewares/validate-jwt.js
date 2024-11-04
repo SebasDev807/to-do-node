@@ -27,9 +27,10 @@ export const validateJWT = async (req, res, next) => {
             });
         }
 
-        // ???
+        // Establecer usuario en la request
         req.user = user;
 
+        // Pasar al siguiente Middleware
         next();
 
     
@@ -38,7 +39,7 @@ export const validateJWT = async (req, res, next) => {
         console.error(error);
         res.status(500).json({
             error: 'Something went broke.'
-        })
+        });
 
     }
 

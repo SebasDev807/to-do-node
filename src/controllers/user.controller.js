@@ -5,9 +5,17 @@ import { generateToken } from "../helpers/generate-token.js";
 
 export const createAccount = async (req = request, res = response) => {
 
-    const { password, status, confirmed, token, ...rest } = req.body;
+    const {email, password, status, confirmed, token, ...rest } = req.body;
 
     try {
+
+        const existUser = await User.findOne({ email });
+
+        if(existUser){
+            return res.status(400).json({
+                message:`User with email ${email} already exists`
+            });
+        }
 
         const user = await User.create({
             password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)),

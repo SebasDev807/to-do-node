@@ -3,7 +3,6 @@ import Task from '../models/task.model.js';
 import { isValidObjectId } from "mongoose";
 
 
-
 export const createTask = async (req = request, res = response) => {
 
     const { status, ...data } = req.body;
@@ -16,7 +15,6 @@ export const createTask = async (req = request, res = response) => {
             status: status ? status.toUpperCase() : undefined,
             ...data
         });
-
 
         return res.status(201).json({ task });
 

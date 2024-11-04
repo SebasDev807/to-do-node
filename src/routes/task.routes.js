@@ -8,6 +8,10 @@ const taskRouter = Router();
 
 //TODO: Validar roles [ADMIN, USER]
 
+//Validaciones antes de llegar al controlador
+//En esta ruta validamos los campos para subir
+//una tarea, previo a esto es necesario haber iniciado 
+//Sesion, si no no se podra realizar el post de la tarea
 taskRouter.post('/', [
     validateJWT,
     check('title', 'Title must be more than 5 characters.')

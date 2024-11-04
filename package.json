@@ -13,6 +13,7 @@
   },
   "scripts": {
     "start": "node app",
+    "db:seed": "node src/seed/user.seed.js",
     "dev": "nodemon --exec \"cls && node app\""
   },
   "type": "module",
