@@ -5,19 +5,24 @@ import { generateToken } from "../helpers/generate-token.js";
 
 export const createAccount = async (req = request, res = response) => {
 
-    const {email, password, status, confirmed, token, ...rest } = req.body;
+    const {username, email, password, status, confirmed, token, ...rest } = req.body;
 
     try {
 
-        const existUser = await User.findOne({ email });
+        const existUser = await User.findOne({ 
+            $or: [{email}, {username}]
+         });
 
-        if(existUser){
+        console.log(email);
+
+        if (existUser) {
             return res.status(400).json({
-                message:`User with email ${email} already exists`
+                message: `User with email ${email} already exists`
             });
         }
 
         const user = await User.create({
+            email,
             password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)),
             token: generateToken(),
             ...rest
@@ -74,7 +79,7 @@ export const confirmAccount = async (req = request, res = response) => {
 
 
 export const desactiveUser = async (req = request, res = response) => {
-    
+
     const { id } = req.params;
 
     try {
@@ -96,12 +101,12 @@ export const desactiveUser = async (req = request, res = response) => {
         });
 
     } catch (error) {
-        
+
         console.error(error);
-        
+
         res.status(500).json({
-            error:'Something went broke.'
+            error: 'Something went broke.'
         });
-        
+
     }
 }
