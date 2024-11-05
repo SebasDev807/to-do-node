@@ -37,8 +37,8 @@ export const validateJWT = async (req, res, next) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({
-            error: 'Something went broke.'
+        res.status(400).json({
+            error: 'Invalid token or has expired'
         });
 
     }
