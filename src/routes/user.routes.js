@@ -11,6 +11,7 @@ userRouter.post('/register', [
     .isString({ min: 5 }),
     check('email', 'invalid email format').isEmail(),
     check('password', 'password is required').isString({ min: 6 }),
+
     checkValidationResult //faltaba agregar esto
     
 
