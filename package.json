@@ -15,5 +15,7 @@
     "start": "node app",
     "dev": "nodemon --exec \"cls && node app\""
   },
-  "type": "module"
+  "type": "module",
+  "author": "Juan Sebastián Astudillo Ordoñez"
 }
+

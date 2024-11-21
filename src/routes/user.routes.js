@@ -1,15 +1,24 @@
+import { check } from "express-validator";
 import { confirmAccount, createAccount, desactiveUser } from "../controllers/user.controller.js";
 import { Router } from "express";
 
 const userRouter = Router();
 
-//TODO:AÑADIR VALIDACIONES
-userRouter.post('/register', createAccount);
 
-//TODO:AÑADIR VALIDACIONES
+userRouter.post('/register', [
+    check('username', 'username must be more than 5 characters')
+        .isString({ min: 5 }),
+    check('email', 'invalid email format').isEmail(),
+    check('password', 'password is required').isString({ min: 6 })
+
+], createAccount);
+
+
 userRouter.get('/verify/:token', confirmAccount);
 
-//TODO:AÑADIR VALIDACIONES
-userRouter.delete('/:id', desactiveUser);
+
+userRouter.delete('/:id', [
+    check('id', 'Invalid mongoId.').isMongoId()
+], desactiveUser);
 
 export default userRouter;

@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 
 const TaskSchema = Schema({
     title: {
@@ -18,6 +18,10 @@ const TaskSchema = Schema({
         type: String,
         enum: ['PENDING', 'IN PROGRESS', 'COMPLETED'],
         default: 'PENDING'
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users'
     }
 },
     { timestamps: true }

@@ -3,6 +3,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import dbConnect from './src/config/db.config.js';
 import taskSeed from './src/seed/task.seed.js';
+import usersSeed from './src/seed/user.seed.js';
 
 dotenv.config();
 
@@ -20,9 +21,9 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/auth', authRouter);
 
 
-//Seed
+//Seeds
 app.use('/api/v1/seed', taskSeed);
-
+app.use('/api/v1/seed', usersSeed)
 
 
 
